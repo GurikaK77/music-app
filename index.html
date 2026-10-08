@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f0b0d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="რიტმი: შენი მუსიკა YouTube-იდან და აუდიო ლინკებიდან, ფლეილისტებით და ოფლაინ მოსმენით">
+<title>რიტმი</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&family=Noto+Serif+Georgian:wght@700;900&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="#" data-act="nav" data-view="home">
+      <span class="brand-mark"><img src="icons/icon.svg" alt=""></span>
+      <span>რიტმი</span>
+    </a>
+    <nav class="side-nav">
+      <button data-act="nav" data-view="home" class="nav-btn"><i data-i="home"></i><span>მთავარი</span></button>
+      <button data-act="focus-add" class="nav-btn"><i data-i="link"></i><span>ლინკის დამატება</span></button>
+    </nav>
+    <div class="side-lib">
+      <div class="lib-head">
+        <span><i data-i="library"></i>ჩემი ფლეილისტები</span>
+        <button class="icon-btn" data-act="new-pl" title="ახალი ფლეილისტი"><i data-i="plus"></i></button>
+      </div>
+      <ul id="sidePl" class="side-pl"></ul>
+      <p class="side-hint">გადმოათრიე სიმღერა ფლეილისტზე</p>
+    </div>
+  </aside>
+  <main id="main" class="main"></main>
+</div>
+
+<footer class="player" id="player">
+  <div class="p-left" data-act="open-full">
+    <div class="p-art" id="pArt"></div>
+    <div class="p-meta"><div class="p-title" id="pTitle">არაფერი უკრავს</div><div class="p-sub" id="pSub">დაამატე ლინკი და დავიწყოთ</div></div>
+  </div>
+  <div class="p-center">
+    <div class="p-ctrls">
+      <button class="icon-btn tog" data-act="shuffle" id="bShuffle" title="არეულად"><i data-i="shuffle"></i></button>
+      <button class="icon-btn" data-act="prev" title="წინა"><i data-i="prev"></i></button>
+      <button class="play-btn" data-act="toggle" id="bPlay" title="დაკვრა"><i data-i="play"></i></button>
+      <button class="icon-btn" data-act="next" title="შემდეგი"><i data-i="next"></i></button>
+      <button class="icon-btn tog" data-act="repeat" id="bRepeat" title="გამეორება"><i data-i="repeat"></i></button>
+    </div>
+    <div class="p-seek"><span id="tCur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" aria-label="გადახვევა"><span id="tDur">0:00</span></div>
+  </div>
+  <div class="p-right">
+    <button class="icon-btn" data-act="cur-menu" title="ფლეილისტში დამატება"><i data-i="plusCircle"></i></button>
+    <i data-i="vol" class="vol-ico"></i><input type="range" id="vol" min="0" max="100" value="90" aria-label="ხმა">
+    <button class="icon-btn" data-act="open-full" title="სრულ ეკრანზე"><i data-i="expand"></i></button>
+  </div>
+  <button class="play-btn mini-play" data-act="toggle" id="bPlayMini" title="დაკვრა"><i data-i="play"></i></button>
+  <div class="mini-prog"><span id="miniProg"></span></div>
+</footer>
+
+<nav class="tabbar">
+  <button data-act="nav" data-view="home" class="tab"><i data-i="home"></i><span>მთავარი</span></button>
+  <button data-act="focus-add" class="tab"><i data-i="link"></i><span>დამატება</span></button>
+  <button data-act="nav" data-view="library" class="tab"><i data-i="library"></i><span>ბიბლიოთეკა</span></button>
+</nav>
+
+<section class="full" id="full" aria-hidden="true">
+  <div class="full-bg" id="fullBg"></div>
+  <header class="full-head">
+    <button class="icon-btn" data-act="close-full" title="დახურვა"><i data-i="down"></i></button>
+    <span>ახლა უკრავს</span>
+    <button class="icon-btn" data-act="cur-menu" title="მეტი"><i data-i="more"></i></button>
+  </header>
+  <div class="full-body">
+    <div class="full-art" id="fullArt"></div>
+    <div class="full-info">
+      <div class="full-meta"><h2 id="fTitle">არაფერი უკრავს</h2><p id="fSub"></p></div>
+      <div class="f-seek"><input type="range" id="fseek" min="0" max="1000" value="0" aria-label="გადახვევა"><div class="f-times"><span id="fCur">0:00</span><span id="fDur">0:00</span></div></div>
+      <div class="f-ctrls">
+        <button class="icon-btn tog" data-act="shuffle" id="fShuffle"><i data-i="shuffle"></i></button>
+        <button class="icon-btn big" data-act="prev"><i data-i="prev"></i></button>
+        <button class="play-btn huge" data-act="toggle" id="fPlay"><i data-i="play"></i></button>
+        <button class="icon-btn big" data-act="next"><i data-i="next"></i></button>
+        <button class="icon-btn tog" data-act="repeat" id="fRepeat"><i data-i="repeat"></i></button>
+      </div>
+      <p class="full-note" id="fNote"></p>
+    </div>
+  </div>
+</section>
+
+<div id="ytHost" class="yt-host"><div id="yt"></div></div>
+<audio id="audio" preload="metadata" playsinline></audio>
+<input type="file" id="fileIn" accept="audio/*" multiple hidden>
+<div id="sheet" class="sheet" aria-hidden="true"><div class="sheet-bd" data-act="close-sheet"></div><div class="sheet-panel" id="sheetPanel" role="dialog"></div></div>
+<div id="toast" class="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
